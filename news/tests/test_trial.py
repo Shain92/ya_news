@@ -1,14 +1,24 @@
 # news/tests/test_trial.py
 from django.test import TestCase
 
-
-class Test(TestCase):
-
-    def test_example_success(self):
-        self.assertTrue(True)  # Этот тест всегда будет проходить успешно.
+from news.models import News
 
 
-class YetAnotherTest(TestCase):
+class TestNews(TestCase):
 
-    def test_example_fails(self):
-        self.assertTrue(False)  # Этот тест всегда будет проваливаться.
+    TITLE = 'Заголовок новости'
+    TEXT = 'Тестовый текст'
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.news = News.objects.create(
+            title=cls.TITLE,
+            text=cls.TEXT,
+        )
+
+    def test_successful_creation(self):
+        news_count = News.objects.count()
+        self.assertEqual(news_count, 1)
+
+    def test_title(self):
+        self.assertEqual(self.news.title, self.TITLE)
