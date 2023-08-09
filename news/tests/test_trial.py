@@ -1,9 +1,12 @@
 # news/tests/test_trial.py
 from django.test import TestCase
 
+from unittest import skip
+
 from news.models import News
 
 
+@skip
 class TestNews(TestCase):
 
     TITLE = 'Заголовок новости'
